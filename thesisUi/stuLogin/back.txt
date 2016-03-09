@@ -1,0 +1,28 @@
+ <div class="col-md-6">
+			  	<table class="table table-condensed">
+					<tr>
+					  <td >科目</td>
+					  <td >教师</td>
+					  <td >作业</td>
+					  <td >批阅</td>
+					  <td >详情</td>
+					</tr>	
+					<tr class="success">
+					  <td >英语</td>
+					  <td >王尼玛</td>
+					  <td >完成</td>
+					  <td >已批阅</td>
+					  <td >查看</td>
+					</tr>	
+				</table>
+			  </div>
+			  <div class="col-md-2">
+			  	<div class="row">
+			  		<strong>任务</strong>
+				</div>
+			  	<div class="row">
+				  <div class="col-md-2">英语</div>
+				  <div class="col-md-2">高等数学</div>
+				  <div class="col-md-2">软件工程</div>
+				</div>
+			  </div>
