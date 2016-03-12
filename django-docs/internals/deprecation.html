@@ -1,0 +1,424 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Django Deprecation Timeline &mdash; Django 1.6 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="https://media.readthedocs.org/css/badge_only.css" type="text/css" />
+    <link rel="stylesheet" href="https://media.readthedocs.org/css/readthedocs-doc-embed.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.6',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="https://media.readthedocs.org/javascript/jquery/jquery-2.0.3.min.js"></script>
+    <script type="text/javascript" src="https://media.readthedocs.org/javascript/jquery/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="https://media.readthedocs.org/javascript/underscore.js"></script>
+    <script type="text/javascript" src="https://media.readthedocs.org/javascript/doctools.js"></script>
+    <script type="text/javascript" src="https://media.readthedocs.org/javascript/readthedocs-doc-embed.js"></script>
+    <link rel="top" title="Django 1.6 documentation" href="../index.html" />
+    <link rel="up" title="Django internals" href="index.html" />
+    <link rel="next" title="The Django source code repository" href="git.html" />
+    <link rel="prev" title="Django’s release process" href="release-process.html" />
+
+ 
+<script type="text/javascript" src="../templatebuiltins.js"></script>
+<script type="text/javascript">
+(function($) {
+    if (!django_template_builtins) {
+       // templatebuiltins.js missing, do nothing.
+       return;
+    }
+    $(document).ready(function() {
+        // Hyperlink Django template tags and filters
+        var base = "../ref/templates/builtins.html";
+        if (base == "#") {
+            // Special case for builtins.html itself
+            base = "";
+        }
+        // Tags are keywords, class '.k'
+        $("div.highlight\\-html\\+django span.k").each(function(i, elem) {
+             var tagname = $(elem).text();
+             if ($.inArray(tagname, django_template_builtins.ttags) != -1) {
+                 var fragment = tagname.replace(/_/, '-');
+                 $(elem).html("<a href='" + base + "#" + fragment + "'>" + tagname + "</a>");
+             }
+        });
+        // Filters are functions, class '.nf'
+        $("div.highlight\\-html\\+django span.nf").each(function(i, elem) {
+             var filtername = $(elem).text();
+             if ($.inArray(filtername, django_template_builtins.tfilters) != -1) {
+                 var fragment = filtername.replace(/_/, '-');
+                 $(elem).html("<a href='" + base + "#" + fragment + "'>" + filtername + "</a>");
+             }
+        });
+    });
+})(jQuery);
+</script>
+
+<!-- RTD Extra Head -->
+
+
+
+<!-- 
+Read the Docs is acting as the canonical URL for your project. 
+If you want to change it, more info is available in our docs:
+  http://docs.readthedocs.org/en/latest/canonical.html
+-->
+<link rel="canonical" href="http://django-chinese-docs-16.readthedocs.org/en/latest/internals/deprecation.html">
+
+<script type="text/javascript">
+  // This is included here because other places don't have access to the pagename variable.
+  var READTHEDOCS_DATA = {
+    project: "django-chinese-docs-16",
+    version: "latest",
+    language: "en",
+    page: "internals/deprecation",
+    theme: "djangodocs",
+    docroot: "/docs/",
+    api_host: "https://readthedocs.org"
+  }
+  // Old variables
+  var doc_version = "latest";
+  var doc_slug = "django-chinese-docs-16";
+  var page_name = "internals/deprecation";
+  var html_theme = "djangodocs";
+</script>
+<!-- RTD Analytics Code -->
+<!-- Included in the header because you don't have a footer block. -->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-17997319-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+<!-- end RTD Analytics Code -->
+
+
+<!-- end RTD <extrahead> -->
+
+  </head>
+  <body>
+
+    <div class="document">
+  <div id="custom-doc" class="yui-t6">
+    <div id="hd">
+      <h1><a href="../index.html">Django 1.6 documentation</a></h1>
+      <div id="global-nav">
+        <a title="Home page" href="../index.html">Home</a>  |
+        <a title="Table of contents" href="../contents.html">Table of contents</a>  |
+        <a title="Global index" href="../genindex.html">Index</a>  |
+        <a title="Module index" href="../py-modindex.html">Modules</a>
+      </div>
+      <div class="nav">
+    &laquo; <a href="release-process.html" title="Django&amp;#8217;s release process">previous</a> 
+     |
+    <a href="index.html" title="Django internals" accesskey="U">up</a>
+   |
+    <a href="git.html" title="The Django source code repository">next</a> &raquo;</div>
+    </div>
+    
+    <div id="bd">
+      <div id="yui-main">
+        <div class="yui-b">
+          <div class="yui-g" id="internals-deprecation">
+            
+  <div class="section" id="s-django-deprecation-timeline">
+<span id="django-deprecation-timeline"></span><h1>Django Deprecation Timeline<a class="headerlink" href="#django-deprecation-timeline" title="Permalink to this headline">¶</a></h1>
+<p>This document outlines when various pieces of Django will be removed or altered
+in a backward incompatible way, following their deprecation, as per the
+<a class="reference internal" href="release-process.html#internal-release-deprecation-policy"><em>deprecation policy</em></a>. More details
+about each item can often be found in the release notes of two versions prior.</p>
+<div class="section" id="s-id1">
+<span id="id1"></span><h2>1.6<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>See the <a class="reference internal" href="../releases/1.4.html"><em>Django 1.4 release notes</em></a> for more details on
+these changes.</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">django.contrib.databrowse</span></tt> will be removed.</li>
+<li><tt class="docutils literal"><span class="pre">django.contrib.localflavor</span></tt> will be removed following an accelerated
+deprecation.</li>
+<li><tt class="docutils literal"><span class="pre">django.contrib.markup</span></tt> will be removed following an accelerated
+deprecation.</li>
+<li>The compatibility modules <tt class="docutils literal"><span class="pre">django.utils.copycompat</span></tt> and
+<tt class="docutils literal"><span class="pre">django.utils.hashcompat</span></tt> as well as the functions
+<tt class="docutils literal"><span class="pre">django.utils.itercompat.all</span></tt> and <tt class="docutils literal"><span class="pre">django.utils.itercompat.any</span></tt> will
+be removed. The Python builtin versions should be used instead.</li>
+<li>The <tt class="docutils literal"><span class="pre">csrf_response_exempt</span></tt> and <tt class="docutils literal"><span class="pre">csrf_view_exempt</span></tt> decorators will
+be removed. Since 1.4 <tt class="docutils literal"><span class="pre">csrf_response_exempt</span></tt> has been a no-op (it
+returns the same function), and <tt class="docutils literal"><span class="pre">csrf_view_exempt</span></tt> has been a
+synonym for <tt class="docutils literal"><span class="pre">django.views.decorators.csrf.csrf_exempt</span></tt>, which should
+be used to replace it.</li>
+<li>The <tt class="docutils literal"><span class="pre">django.core.cache.backends.memcached.CacheClass</span></tt> backend
+was split into two in Django 1.3 in order to introduce support for
+PyLibMC. The historical <tt class="docutils literal"><span class="pre">CacheClass</span></tt> will be removed in favor of
+<tt class="docutils literal"><span class="pre">django.core.cache.backends.memcached.MemcachedCache</span></tt>.</li>
+<li>The UK-prefixed objects of <tt class="docutils literal"><span class="pre">django.contrib.localflavor.uk</span></tt> will only
+be accessible through their GB-prefixed names (GB is the correct
+ISO 3166 code for United Kingdom).</li>
+<li>The <tt class="docutils literal"><span class="pre">IGNORABLE_404_STARTS</span></tt> and <tt class="docutils literal"><span class="pre">IGNORABLE_404_ENDS</span></tt> settings have been
+superseded by <a class="reference internal" href="../ref/settings.html#std:setting-IGNORABLE_404_URLS"><tt class="xref std std-setting docutils literal"><span class="pre">IGNORABLE_404_URLS</span></tt></a> in the 1.4 release. They will be
+removed.</li>
+<li>The <a class="reference internal" href="../ref/contrib/formtools/form-wizard.html"><em>form wizard</em></a> has been
+refactored to use class-based views with pluggable backends in 1.4.
+The previous implementation will be removed.</li>
+<li>Legacy ways of calling
+<a class="reference internal" href="../topics/cache.html#django.views.decorators.cache.cache_page" title="django.views.decorators.cache.cache_page"><tt class="xref py py-func docutils literal"><span class="pre">cache_page()</span></tt></a> will be removed.</li>
+<li>The backward-compatibility shim to automatically add a debug-false
+filter to the <tt class="docutils literal"><span class="pre">'mail_admins'</span></tt> logging handler will be removed. The
+<a class="reference internal" href="../ref/settings.html#std:setting-LOGGING"><tt class="xref std std-setting docutils literal"><span class="pre">LOGGING</span></tt></a> setting should include this filter explicitly if
+it is desired.</li>
+<li>The builtin truncation functions <tt class="docutils literal"><span class="pre">django.utils.text.truncate_words()</span></tt>
+and <tt class="docutils literal"><span class="pre">django.utils.text.truncate_html_words()</span></tt> will be removed in
+favor of the <tt class="docutils literal"><span class="pre">django.utils.text.Truncator</span></tt> class.</li>
+<li>The <a class="reference internal" href="../ref/contrib/gis/geoip.html#django.contrib.gis.geoip.GeoIP" title="django.contrib.gis.geoip.GeoIP"><tt class="xref py py-class docutils literal"><span class="pre">GeoIP</span></tt></a> class was moved to
+<a class="reference internal" href="../ref/contrib/gis/geoip.html#module-django.contrib.gis.geoip" title="django.contrib.gis.geoip: High-level Python interface for MaxMind's GeoIP C library."><tt class="xref py py-mod docutils literal"><span class="pre">django.contrib.gis.geoip</span></tt></a> in 1.4 &#8211; the shortcut in
+<a class="reference internal" href="../ref/contrib/gis/utils.html#module-django.contrib.gis.utils" title="django.contrib.gis.utils: GeoDjango's collection of utilities."><tt class="xref py py-mod docutils literal"><span class="pre">django.contrib.gis.utils</span></tt></a> will be removed.</li>
+<li><tt class="docutils literal"><span class="pre">django.conf.urls.defaults</span></tt> will be removed. The functions
+<a class="reference internal" href="../ref/urls.html#django.conf.urls.include" title="django.conf.urls.include"><tt class="xref py py-func docutils literal"><span class="pre">include()</span></tt></a>, <a class="reference internal" href="../ref/urls.html#django.conf.urls.patterns" title="django.conf.urls.patterns"><tt class="xref py py-func docutils literal"><span class="pre">patterns()</span></tt></a> and
+<a class="reference internal" href="../ref/urls.html#django.conf.urls.url" title="django.conf.urls.url"><tt class="xref py py-func docutils literal"><span class="pre">url()</span></tt></a> plus <a class="reference internal" href="../ref/urls.html#django.conf.urls.handler404" title="django.conf.urls.handler404"><tt class="xref py py-data docutils literal"><span class="pre">handler404</span></tt></a>,
+<a class="reference internal" href="../ref/urls.html#django.conf.urls.handler500" title="django.conf.urls.handler500"><tt class="xref py py-data docutils literal"><span class="pre">handler500</span></tt></a>, are now available through
+<a class="reference internal" href="../ref/urls.html#module-django.conf.urls" title="django.conf.urls"><tt class="xref py py-mod docutils literal"><span class="pre">django.conf.urls</span></tt></a> .</li>
+<li>The functions <tt class="docutils literal"><span class="pre">setup_environ()</span></tt> and <tt class="docutils literal"><span class="pre">execute_manager()</span></tt> will be removed
+from <a class="reference internal" href="../howto/custom-management-commands.html#module-django.core.management" title="django.core.management"><tt class="xref py py-mod docutils literal"><span class="pre">django.core.management</span></tt></a>. This also means that the old (pre-1.4)
+style of <tt class="file docutils literal"><span class="pre">manage.py</span></tt> file will no longer work.</li>
+<li>Setting the <tt class="docutils literal"><span class="pre">is_safe</span></tt> and <tt class="docutils literal"><span class="pre">needs_autoescape</span></tt> flags as attributes of
+template filter functions will no longer be supported.</li>
+<li>The attribute <tt class="docutils literal"><span class="pre">HttpRequest.raw_post_data</span></tt> was renamed to <tt class="docutils literal"><span class="pre">HttpRequest.body</span></tt>
+in 1.4. The backward compatibility will be removed &#8211;
+<tt class="docutils literal"><span class="pre">HttpRequest.raw_post_data</span></tt> will no longer work.</li>
+<li>The value for the <tt class="docutils literal"><span class="pre">post_url_continue</span></tt> parameter in
+<tt class="docutils literal"><span class="pre">ModelAdmin.response_add()</span></tt> will have to be either <tt class="docutils literal"><span class="pre">None</span></tt> (to redirect
+to the newly created object&#8217;s edit page) or a pre-formatted url. String
+formats, such as the previous default <tt class="docutils literal"><span class="pre">'../%s/'</span></tt>, will not be accepted any
+more.</li>
+</ul>
+</div>
+<div class="section" id="s-id2">
+<span id="id2"></span><h2>1.7<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>See the <a class="reference internal" href="../releases/1.5.html"><em>Django 1.5 release notes</em></a> for more details on
+these changes.</p>
+<ul class="simple">
+<li>The module <tt class="docutils literal"><span class="pre">django.utils.simplejson</span></tt> will be removed. The standard library
+provides <a class="reference external" href="http://docs.python.org/2.7/library/json.html#module-json" title="(in Python v2.7)"><tt class="xref py py-mod docutils literal"><span class="pre">json</span></tt></a> which should be used instead.</li>
+<li>The function <tt class="docutils literal"><span class="pre">django.utils.itercompat.product</span></tt> will be removed. The Python
+builtin version should be used instead.</li>
+<li>Auto-correction of INSTALLED_APPS and TEMPLATE_DIRS settings when they are
+specified as a plain string instead of a tuple will be removed and raise an
+exception.</li>
+<li>The <tt class="docutils literal"><span class="pre">mimetype</span></tt> argument to the <tt class="docutils literal"><span class="pre">__init__</span></tt> methods of
+<a class="reference internal" href="../ref/request-response.html#django.http.HttpResponse" title="django.http.HttpResponse"><tt class="xref py py-class docutils literal"><span class="pre">HttpResponse</span></tt></a>,
+<a class="reference internal" href="../ref/template-response.html#django.template.response.SimpleTemplateResponse" title="django.template.response.SimpleTemplateResponse"><tt class="xref py py-class docutils literal"><span class="pre">SimpleTemplateResponse</span></tt></a>, and
+<a class="reference internal" href="../ref/template-response.html#django.template.response.TemplateResponse" title="django.template.response.TemplateResponse"><tt class="xref py py-class docutils literal"><span class="pre">TemplateResponse</span></tt></a>, will be removed.
+<tt class="docutils literal"><span class="pre">content_type</span></tt> should be used instead. This also applies to the
+<a class="reference internal" href="../topics/http/shortcuts.html#django.shortcuts.render_to_response" title="django.shortcuts.render_to_response"><tt class="xref py py-func docutils literal"><span class="pre">render_to_response()</span></tt></a> shortcut and
+the sitemamp views, <a class="reference internal" href="../ref/contrib/sitemaps.html#django.contrib.sitemaps.views.index" title="django.contrib.sitemaps.views.index"><tt class="xref py py-func docutils literal"><span class="pre">index()</span></tt></a> and
+<a class="reference internal" href="../ref/contrib/sitemaps.html#django.contrib.sitemaps.views.sitemap" title="django.contrib.sitemaps.views.sitemap"><tt class="xref py py-func docutils literal"><span class="pre">sitemap()</span></tt></a>.</li>
+<li>When <a class="reference internal" href="../ref/request-response.html#django.http.HttpResponse" title="django.http.HttpResponse"><tt class="xref py py-class docutils literal"><span class="pre">HttpResponse</span></tt></a> is instantiated with an iterator,
+or when <a class="reference internal" href="../ref/request-response.html#django.http.HttpResponse.content" title="django.http.HttpResponse.content"><tt class="xref py py-attr docutils literal"><span class="pre">content</span></tt></a> is set to an iterator,
+that iterator will be immediately consumed.</li>
+<li>The <tt class="docutils literal"><span class="pre">AUTH_PROFILE_MODULE</span></tt> setting, and the <tt class="docutils literal"><span class="pre">get_profile()</span></tt> method on
+the User model, will be removed.</li>
+<li>The <tt class="docutils literal"><span class="pre">cleanup</span></tt> management command will be removed. It&#8217;s replaced by
+<tt class="docutils literal"><span class="pre">clearsessions</span></tt>.</li>
+<li>The <tt class="docutils literal"><span class="pre">daily_cleanup.py</span></tt> script will be removed.</li>
+<li>The <tt class="docutils literal"><span class="pre">depth</span></tt> keyword argument will be removed from
+<a class="reference internal" href="../ref/models/querysets.html#django.db.models.query.QuerySet.select_related" title="django.db.models.query.QuerySet.select_related"><tt class="xref py py-meth docutils literal"><span class="pre">select_related()</span></tt></a>.</li>
+<li>The undocumented <tt class="docutils literal"><span class="pre">get_warnings_state()</span></tt>/<tt class="docutils literal"><span class="pre">restore_warnings_state()</span></tt>
+functions from <a class="reference internal" href="../topics/testing/advanced.html#module-django.test.utils" title="django.test.utils: Helpers to write custom test runners."><tt class="xref py py-mod docutils literal"><span class="pre">django.test.utils</span></tt></a> and the <tt class="docutils literal"><span class="pre">save_warnings_state()</span></tt>/
+<tt class="docutils literal"><span class="pre">restore_warnings_state()</span></tt>
+<a class="reference internal" href="../topics/testing/overview.html#django-testcase-subclasses"><em>django.test.*TestCase</em></a> methods are
+deprecated. Use the <a class="reference external" href="http://docs.python.org/2.7/library/warnings.html#warnings.catch_warnings" title="(in Python v2.7)"><tt class="xref py py-class docutils literal"><span class="pre">warnings.catch_warnings</span></tt></a> context manager
+available starting with Python 2.6 instead.</li>
+<li>The undocumented <tt class="docutils literal"><span class="pre">check_for_test_cookie</span></tt> method in
+<a class="reference internal" href="../topics/auth/default.html#django.contrib.auth.forms.AuthenticationForm" title="django.contrib.auth.forms.AuthenticationForm"><tt class="xref py py-class docutils literal"><span class="pre">AuthenticationForm</span></tt></a> will be removed
+following an accelerated deprecation. Users subclassing this form should
+remove calls to this method, and instead ensure that their auth related views
+are CSRF protected, which ensures that cookies are enabled.</li>
+<li>The version of <a class="reference internal" href="../topics/auth/default.html#django.contrib.auth.views.password_reset_confirm" title="django.contrib.auth.views.password_reset_confirm"><tt class="xref py py-func docutils literal"><span class="pre">django.contrib.auth.views.password_reset_confirm()</span></tt></a> that
+supports base36 encoded user IDs
+(<tt class="docutils literal"><span class="pre">django.contrib.auth.views.password_reset_confirm_uidb36</span></tt>) will be
+removed. If your site has been running Django 1.6 for more than
+<a class="reference internal" href="../ref/settings.html#std:setting-PASSWORD_RESET_TIMEOUT_DAYS"><tt class="xref std std-setting docutils literal"><span class="pre">PASSWORD_RESET_TIMEOUT_DAYS</span></tt></a>, this change will have no effect. If
+not, then any password reset links generated before you upgrade to Django 1.7
+won&#8217;t work after the upgrade.</li>
+</ul>
+</div>
+<div class="section" id="s-id3">
+<span id="id3"></span><h2>1.8<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first"><tt class="docutils literal"><span class="pre">django.contrib.comments</span></tt> will be removed.</p>
+</li>
+<li><p class="first">The following transaction management APIs will be removed:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">TransactionMiddleware</span></tt>,</li>
+<li>the decorators and context managers <tt class="docutils literal"><span class="pre">autocommit</span></tt>, <tt class="docutils literal"><span class="pre">commit_on_success</span></tt>,
+and <tt class="docutils literal"><span class="pre">commit_manually</span></tt>, defined in <tt class="docutils literal"><span class="pre">django.db.transaction</span></tt>,</li>
+<li>the functions <tt class="docutils literal"><span class="pre">commit_unless_managed</span></tt> and <tt class="docutils literal"><span class="pre">rollback_unless_managed</span></tt>,
+also defined in <tt class="docutils literal"><span class="pre">django.db.transaction</span></tt>,</li>
+<li>the <tt class="docutils literal"><span class="pre">TRANSACTIONS_MANAGED</span></tt> setting.</li>
+</ul>
+<p>Upgrade paths are described in the <a class="reference internal" href="../topics/db/transactions.html#transactions-upgrading-from-1-5"><em>transaction management docs</em></a>.</p>
+</li>
+<li><p class="first">The <a class="reference internal" href="../ref/templates/builtins.html#std:templatetag-cycle"><tt class="xref std std-ttag docutils literal"><span class="pre">cycle</span></tt></a> and <a class="reference internal" href="../ref/templates/builtins.html#std:templatetag-firstof"><tt class="xref std std-ttag docutils literal"><span class="pre">firstof</span></tt></a> template tags will auto-escape their
+arguments. In 1.6 and 1.7, this behavior is provided by the version of these
+tags in the <tt class="docutils literal"><span class="pre">future</span></tt> template tag library.</p>
+</li>
+<li><p class="first">The <tt class="docutils literal"><span class="pre">SEND_BROKEN_LINK_EMAILS</span></tt> setting will be removed. Add the
+<a class="reference internal" href="../ref/middleware.html#django.middleware.common.BrokenLinkEmailsMiddleware" title="django.middleware.common.BrokenLinkEmailsMiddleware"><tt class="xref py py-class docutils literal"><span class="pre">django.middleware.common.BrokenLinkEmailsMiddleware</span></tt></a> middleware to
+your <a class="reference internal" href="../ref/settings.html#std:setting-MIDDLEWARE_CLASSES"><tt class="xref std std-setting docutils literal"><span class="pre">MIDDLEWARE_CLASSES</span></tt></a> setting instead.</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">Model._meta.module_name</span></tt> was renamed to <tt class="docutils literal"><span class="pre">model_name</span></tt>.</p>
+</li>
+<li><p class="first">Remove the backward compatible shims introduced to rename <tt class="docutils literal"><span class="pre">get_query_set</span></tt>
+and similar queryset methods. This affects the following classes:
+<tt class="docutils literal"><span class="pre">BaseModelAdmin</span></tt>, <tt class="docutils literal"><span class="pre">ChangeList</span></tt>, <tt class="docutils literal"><span class="pre">BaseCommentNode</span></tt>,
+<tt class="docutils literal"><span class="pre">GenericForeignKey</span></tt>, <tt class="docutils literal"><span class="pre">Manager</span></tt>, <tt class="docutils literal"><span class="pre">SingleRelatedObjectDescriptor</span></tt> and
+<tt class="docutils literal"><span class="pre">ReverseSingleRelatedObjectDescriptor</span></tt>.</p>
+</li>
+<li><p class="first">Remove the backward compatible shims introduced to rename the attributes
+<tt class="docutils literal"><span class="pre">ChangeList.root_query_set</span></tt> and <tt class="docutils literal"><span class="pre">ChangeList.query_set</span></tt>.</p>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">django.views.defaults.shortcut</span></tt> will be removed, as part of the
+goal of removing all <tt class="docutils literal"><span class="pre">django.contrib</span></tt> references from the core
+Django codebase. Instead use
+<tt class="docutils literal"><span class="pre">django.contrib.contenttypes.views.shortcut</span></tt>. <tt class="docutils literal"><span class="pre">django.conf.urls.shortcut</span></tt>
+will also be removed.</p>
+</li>
+<li><p class="first">Support for the Python Imaging Library (PIL) module will be removed, as it
+no longer appears to be actively maintained &amp; does not work on Python 3.
+You are advised to install <a class="reference external" href="https://pypi.python.org/pypi/Pillow">Pillow</a>, which should be used instead.</p>
+</li>
+</ul>
+<ul class="simple">
+<li>The following private APIs will be removed:<ul>
+<li><tt class="docutils literal"><span class="pre">django.db.backend</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">django.db.close_connection()</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">django.db.backends.creation.BaseDatabaseCreation.set_autocommit()</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">django.db.transaction.is_managed()</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">django.db.transaction.managed()</span></tt></li>
+</ul>
+</li>
+<li><tt class="docutils literal"><span class="pre">django.forms.widgets.RadioInput</span></tt> will be removed in favor of
+<tt class="docutils literal"><span class="pre">django.forms.widgets.RadioChoiceInput</span></tt>.</li>
+<li>The module <tt class="docutils literal"><span class="pre">django.test.simple</span></tt> and the class
+<tt class="docutils literal"><span class="pre">django.test.simple.DjangoTestSuiteRunner</span></tt> will be removed. Instead use
+<tt class="docutils literal"><span class="pre">django.test.runner.DiscoverRunner</span></tt>.</li>
+<li>The module <tt class="docutils literal"><span class="pre">django.test._doctest</span></tt> will be removed. Instead use the doctest
+module from the Python standard library.</li>
+<li>The <tt class="docutils literal"><span class="pre">CACHE_MIDDLEWARE_ANONYMOUS_ONLY</span></tt> setting will be removed.</li>
+<li>Usage of the hard-coded <em>Hold down &#8220;Control&#8221;, or &#8220;Command&#8221; on a Mac, to select
+more than one.</em> string to override or append to user-provided <tt class="docutils literal"><span class="pre">help_text</span></tt> in
+forms for ManyToMany model fields will not be performed by Django anymore
+either at the model or forms layer.</li>
+<li>The <tt class="docutils literal"><span class="pre">Model._meta.get_(add|change|delete)_permission</span></tt> methods will
+be removed.</li>
+</ul>
+</div>
+<div class="section" id="s-id4">
+<span id="id4"></span><h2>2.0<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">ssi</span></tt> and <tt class="docutils literal"><span class="pre">url</span></tt> template tags will be removed from the <tt class="docutils literal"><span class="pre">future</span></tt> template
+tag library (used during the 1.3/1.4 deprecation period).</li>
+</ul>
+</div>
+</div>
+
+
+          </div>         
+        </div>
+      </div>
+      
+        
+          <div class="yui-b" id="sidebar">
+            
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../contents.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Django Deprecation Timeline</a><ul>
+<li><a class="reference internal" href="#id1">1.6</a></li>
+<li><a class="reference internal" href="#id2">1.7</a></li>
+<li><a class="reference internal" href="#id3">1.8</a></li>
+<li><a class="reference internal" href="#id4">2.0</a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>Browse</h3>
+  <ul>
+    
+      <li>Prev: <a href="release-process.html">Django&#8217;s release process</a></li>
+    
+    
+      <li>Next: <a href="git.html">The Django source code repository</a></li>
+    
+  </ul>
+  <h3>You are here:</h3>
+  <ul>
+      <li>
+        <a href="../index.html">Django 1.6 documentation</a>
+        
+          <ul><li><a href="index.html">Django internals</a>
+        
+        <ul><li>Django Deprecation Timeline</li></ul>
+        </li></ul>
+      </li>
+  </ul>  
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/internals/deprecation.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+              <h3>Last update:</h3>
+              <p class="topless">Feb 17, 2014</p>
+          </div> 
+        
+      
+    </div>
+    
+    <div id="ft">
+      <div class="nav">
+    &laquo; <a href="release-process.html" title="Django&amp;#8217;s release process">previous</a> 
+     |
+    <a href="index.html" title="Django internals" accesskey="U">up</a>
+   |
+    <a href="git.html" title="The Django source code repository">next</a> &raquo;</div>
+    </div>
+  </div>
+
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,30 @@
+.choose-class{
+	width: 20%;
+	height: 100%;
+	padding: 20px;
+	margin-top: -40px;
+	padding-top:40px ;
+	float: left;
+	border-right: 2px solid #ddd;
+	position: inherit;
+}
+.write-work{
+	width: 80%;
+	height: 100%;
+	padding-left:10px ;
+	margin-top: -40px;
+	float: left;
+	position: inherit;
+}
+#input-class{
+	margin-bottom: 50px;
+}
+.write-textarea{
+	height: 90%;
+}
+#btn-submit{
+	position: fixed;
+	z-index: 100;
+	bottom: 5px;
+	right: 0px;
+}

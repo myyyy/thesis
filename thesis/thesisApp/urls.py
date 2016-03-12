@@ -8,4 +8,7 @@ from views import *
 
 urlpatterns = patterns('',
 	url(r'^$',stu_course),
+	 (r'^admin/', include('django.contrib.admin.urls')),
 )
+
+
