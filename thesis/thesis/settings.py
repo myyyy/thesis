@@ -52,7 +52,7 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'thesis.urls'
 
 WSGI_APPLICATION = 'thesis.wsgi.application'
-
+SESSION_SERIALIZER  = 'django.contrib.sessions.serializers.PickleSerializer'
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases

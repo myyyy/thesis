@@ -81,7 +81,12 @@
 					{% for course in courses %}
 					<div class="classes">
 						<div class="ioc-classes"></div>
-						<div class="classes-name"><a href="showWord.html">{{ course.coures_name}}</a></div>
+						<div class="classes-name">
+							<!-- 进入当前课程的作业详细界面 -->
+							<a href="{% url 'exercisesDetail' 1%}">
+								{{ course.coures_name}}
+							</a>
+						</div>
 					</div>
 					{% endfor %}
 					
