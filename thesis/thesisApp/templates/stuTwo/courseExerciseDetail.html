@@ -74,8 +74,8 @@
 					    </ul>-->
 					    <ul class="nav nav-tabs">
 					 	  <li role="presentation" ><a href="#">主页</a></li>
-						  <li role="presentation" ><a href="projects.html">课程</a></li>
-						  <li role="presentation" class="active"> <a href="#">习题</a></li>
+						  <li role="presentation" ><a href="{% url 'course' %}">课程</a></li>
+						  <li role="presentation" class="active"> <a href="{% url 'courseExercises' course_name.id%}">{{course_name.coures_name}}--习题</a></li>
 						  <li role="presentation" id="submit-work"><a href="#">留-作业</a></li>
 						</ul>
 						
@@ -85,10 +85,10 @@
 						<div class="ioc-classes"></div>
 						<div class="classes-name">
 						<a href="showWord.html">
-							{{course_exercise.exercisec.ex_title}}--
+							{{course_exercise.exercisec}}--
 						</a>
 						<a href="{% url 'exercisesDetail' 1%}">
-							{{course_exercise.answer_content}}
+							{{course_exercise.is_finished}}
 						</a>
 						</div>
 					</div>

@@ -66,6 +66,7 @@ class  LocalAuth(models.Model):
 class ExerciseUserAnswer(models.Model):
                 exercisec = models.ForeignKey(Exercise)
                 user= models.ForeignKey(User)
+                course_id = models.ForeignKey(Course)
                 answer_content = models.CharField(max_length=30)
                 is_finished = models.BooleanField(default=False)
                 score = models.CharField(max_length=30)

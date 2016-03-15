@@ -26,7 +26,9 @@ def  stu_course(request):
 def course_exercise_detail (request,id):
 	try:
 		# course_exercises = Exercise.objects.all().filter(course_id = str(id))
-		course_exercises = User.objects.get(number = str(id)).exerciseuseranswer_set.all()
+		user = request.session.get('user_obj', False)
+		course_name = Course.objects.get(id = str(id))
+		course_exercises = User.objects.get(number = str(user.number)).exerciseuseranswer_set.filter(course_id =str(id))
 	except Exercise.DoesNotExist:
 		raise Http404
 	return render(request, 'stuTwo/courseExerciseDetail.html',
