@@ -13,13 +13,15 @@ from django.core import serializers
 
 from django.template import loader,Context
 from django.http import HttpResponse
+import hashlib
+from datetime import datetime
 # Create your views here
 #显示课程
 def  stu_course(request):
 	#查询指定用户的课程
 	user = request.session.get('user_obj', False)
-	courses = User.objects.get(number = str(user.number)).course.all()
-  	return render(request, 'stuTwo/projects.html',  locals(),
+	courses = User.objects.get(id = str(user.id)).courseuser_set.all()
+  	return render(request, 'stuTwo/course.html',  locals(),
             		context_instance=RequestContext(request))
 
 #该课程下的习题
@@ -76,6 +78,46 @@ def user_login(request):
                 return HttpResponseRedirect('stuTwo/userLogin.html')
     else:
         return render_to_response('stuTwo/userLogin.html',context_instance=RequestContext(request))
+
+def msg (request):
+
+	return render_to_response('stuTwo/msg.html',
+           				locals(),
+           				 context_instance=RequestContext(request))	
+def register(request):
+    if request.method == "POST":
+            #获取表单信息
+            m = hashlib.md5()
+
+            username = request.POST.get('account','')  
+            if LocalAuth.objects.filter(user_account = str(username)):
+	            	return render_to_response('reg.html',
+	           				locals(),
+	           				 context_instance=RequestContext(request))
+            else:
+	            password = request.POST.get('password','')  
+	            m.update(password)
+	            #将表单写入数据库
+	            user = User()
+	            user.user_name =  username
+	            user.save()
+	            userAuth = LocalAuth()
+	            userAuth.user_account = username
+	            userAuth.user_password= m.hexdigest()
+	            userAuth.create_time = datetime.now()
+	            userAuth.is_login = True
+	            userAuth.user = user
+	            userAuth.save()
+	            #返回注册成功页面
+	            response = HttpResponseRedirect('/thesisApp/course/')
+	            request.session['user_obj'] = user
+	            response.set_cookie('username',username,3600)
+	            return response
+	            	
+    else:
+ 	return render_to_response('reg.html',
+           				locals(),
+           				 context_instance=RequestContext(request))
 # def userLogout(request):  
 #     auth.logout(request)  
 #     return HttpResponseRedirect('/user') 			
@@ -92,3 +134,4 @@ def user_login(request):
 	# 	stu_course = paginator.page(1)
 	# except EmptyPage:
 	# 	stu_course = paginator.page(paginator.page_num)
+

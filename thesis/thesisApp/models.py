@@ -42,7 +42,7 @@ class  User(models.Model):
                 create_time = models.CharField(max_length=50)
                 major_id= models.CharField(max_length=50)
                 academy_id = models.CharField(max_length=50)
-                class_id = models.ForeignKey(Class)
+                # class_id = models.ForeignKey(Class)
                 course = models.ManyToManyField(Course, through = "CourseUser")
                 exercise = models.ManyToManyField(Exercise, through = "ExerciseUserAnswer")
                 def __unicode__(self):
@@ -52,9 +52,10 @@ class  User(models.Model):
 class  CourseUser(models.Model):
                 coure = models.ForeignKey(Course)
                 user = models.ForeignKey(User)
+                num_unfinished = models.CharField(max_length=50)
 
 class  LocalAuth(models.Model):
-                user_id= models.ForeignKey(User)
+                user = models.OneToOneField(User)
                 user_account = models.CharField(max_length=50)
                 user_password = models.CharField(max_length=50)
                 role_id = models.CharField(max_length=50)
