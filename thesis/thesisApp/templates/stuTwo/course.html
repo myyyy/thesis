@@ -1,11 +1,8 @@
 <!doctype html>
-<html lang="en" class="no-js">
+<html lang="en" >
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="{{ STATIC_URL }}css/submitWord.css" />
-	<link rel="stylesheet" href="{{ STATIC_URL }}css/workDetail.css" />
-	<link rel="stylesheet" href="{{ STATIC_URL }}css/showWork.css" />
 	<link rel="stylesheet" href="{{ STATIC_URL }}css/projects.css"> <!-- CSS reset -->
 	<link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/bootstrap-responsive.min.css" />
@@ -20,6 +17,7 @@
   	
 	<title>Animated Page Transition #2 | CodyHouse</title>
 </head>
+	
 <body>
 	<nav class="navigation">
 		<ul>
@@ -40,7 +38,7 @@
 			</li>
 
 			<li>
-				<a href="#0" >
+				<a href="{% url 'course' %}" >
 					
 					<span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>
 					<br/>
@@ -49,7 +47,7 @@
 			</li>
 
 			<li>
-				<a href="#0"  >
+				<a href="{% url 'msg' %}"  >
 					
 					<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
 					<br/>
@@ -60,48 +58,46 @@
 	</nav> <!-- .cd-side-navigation -->
 	
 	<main class="cd-main">
-		<section class="cd-section contact visible">
-			<div class="cd-content" id="contact-content">
-				
-				<div class="choose-class">
-					<!--搜索框-->
-					<div class="input-group" id="input-class">
-					  <span class="input-group-addon" id="basic-addon1">搜索</span>
-					  <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
-					</div>
-					<!--下拉-->
-					<div class="row">
-						  <div class="col-lg-12">
-						    <div class="input-group">
-						      <div class="input-group-btn">
-						        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">选择 <span class="caret"></span></button>
-						        <ul class="dropdown-menu">
-						          <li><a href="#">Action</a></li>
-						          <li><a href="#">Another action</a></li>
-						          <li><a href="#">Something else here</a></li>
-						          <li role="separator" class="divider"></li>
-						          <li><a href="#">Separated link</a></li>
-						        </ul>
-						      </div><!-- /btn-group -->
-						      
-						      <input type="text" class="form-control" aria-label="...">
-						    </div><!-- /input-group -->
-						  </div><!-- /.col-lg-6 -->
-					</div>
-					
+		<section class="cd-section projects visible">
+			<!--<header>
+				<div class="cd-title">
+					<h2>Projects</h2>
+					<span>See My class&work</span>
 				</div>
 
-				<div class="write-work">
-					<textarea class="write-textarea">Easy (and free!) You should check out our premium features.</textarea>
-					<button type="button" class="btn btn-default" id="btn-submit">提交</button>
-				</div>
+				<a href="#projects-content" class="cd-scroll">Scroll Down</a>
+			</header>-->
+
+			<div class="cd-content" id="projects-content">
+					<div class="classes-navigation">
+					    <ul class="nav nav-tabs">
+					 	  <li role="presentation" ><a href="#">主页</a></li>
+						  <li role="presentation" class="active"><a href="{% url 'course' %}">课程</a></li>
+						</ul>
+						
+					</div>
+					{% for course in courses %}
+					<div class="classes">
+						<div class="ioc-classes"></div>
+						<div class="classes-name">
+							<!-- 进入当前课程的作业详细界面 -->
+							<a href="{% url 'courseExercises' course.id %}">
+								{{ course.coure}}  
+								<span class="badge">
+								{{ course.num_unfinished}} 
+								</span>
+							</a>
+						</div>
+					</div>
+					{% endfor %}
+					
+					
+					
 			</div> <!-- .cd-content -->
 		</section> <!-- .cd-section -->
 	</main> <!-- .cd-main -->
 
-	<div id="cd-loading-bar" data-scale="1" class="contact"></div> <!-- lateral loading bar -->
-	<script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
-  	<script>tinymce.init({ selector:'textarea' });</script>
+	<div id="cd-loading-bar" data-scale="1" class="projects"></div> <!-- lateral loading bar -->
 <script src="{{ STATIC_URL }}js/jquery-2.1.4.js"></script>
 <script src="{{ STATIC_URL }}js/velocity.min.js"></script>
 <script src="{{ STATIC_URL }}js/main.js"></script> <!-- Resource jQuery -->

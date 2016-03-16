@@ -1,0 +1,48 @@
+.choose-class{
+	width: 20%;
+	height: 100%;
+	padding: 20px;
+	margin-top: -40px;
+	padding-top:40px ;
+	float: left;
+	border-right: 2px solid #ccc;
+	position: inherit;
+}
+.write-work{
+	width: 80%;
+	height: 100%;
+	padding-left:10px ;
+	margin-top: -40px;
+	float: left;
+	position: inherit;
+}
+
+.write-textarea{
+	height: 90%;
+}
+#btn-submit{
+	position: fixed;
+	z-index: 100;
+	bottom: 5px;
+	right: 0px;
+}
+.choose-class h1{
+	font-size: 20px;
+	color: #000000;
+}
+.choose-class span{
+	color:#666;
+
+}
+.write-work h1{
+	font-size: 15px;
+	color: #000000;
+	margin-bottom: 40px;
+}
+.nav{
+	margin-top: 30px;
+}
+#msg-table td{
+	background-color: #ebebeb;
+}
+

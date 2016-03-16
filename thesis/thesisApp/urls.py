@@ -12,7 +12,8 @@ urlpatterns = patterns('',
  	url(r'^course/exercises/(?P<id>\d+)/$', 'thesisApp.views.course_exercise_detail',name = 'courseExercises'),
  	url(r'^course/exercises/show/(?P<id>\d+)/$', 'thesisApp.views.show_exercise',name = 'exercisesDetail'),
  	url(r'^thesisApp/course/submit/(?P<id>\d+)/$', 'thesisApp.views.submit_exercise',name = 'submitExercise'),
- 	
+ 	url(r'^msg/$', 'thesisApp.views.msg',name='msg'),
+ 	url(r'^reg/$', 'thesisApp.views.register',name='reg'),
 )
 
 
