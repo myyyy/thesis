@@ -79,7 +79,7 @@ def user_login(request):
                 #比较失败，还在login
                 return HttpResponseRedirect('/thesisApp/course/')
     else:
-        return render_to_response('stuTwo/userLogin.html',context_instance=RequestContext(request))
+        return render_to_response('login.html',context_instance=RequestContext(request))
 
 def msg (request):
 	user = request.session.get('user_obj', False)
@@ -105,7 +105,7 @@ def register(request):
 
             username = request.POST.get('account','')  
             if LocalAuth.objects.filter(user_account = str(username)):
-	            	return render_to_response('reg.html',
+	            	return render_to_response('register.html',
 	           				locals(),
 	           				 context_instance=RequestContext(request))
             else:
@@ -129,7 +129,7 @@ def register(request):
 	            return response
 	            	
     else:
- 	return render_to_response('reg.html',
+ 	return render_to_response('register.html',
            				locals(),
            				 context_instance=RequestContext(request))
 # def userLogout(request):  

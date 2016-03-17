@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+	<title>Animated Form Switching with jQuery</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<link rel="shortcut icon" href="../favicon.ico" type="img/x-icon"/>
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/login-reg-style.css" />
+
+    </head>
+    <body>
+		<div class="wrapper">
+			<h4>大学之道,在明明德,在亲民,</h4>
+			<h2>What the great learning teaches, <span>is to illustrate illustrious virtue; </span>  to renovate the people; and to rest in the highest excellence.</h2>
+			<div class="content">
+				<div id="form_wrapper" class="form_wrapper">
+					<form class="register active" method = 'POST'>
+					{% csrf_token %}
+						<h3>注册</h3>
+						<div class="column">
+							<div>
+								<label>用户名:</label>
+								<input type="text"  name="account" placeholder="必填项" required/>
+								<span class="error">This is an error</span>
+							</div>
+							<div>
+								<label>学号</label>
+								<input type="text" required pattern="^[0-9]*[1-9][0-9]*$"/>
+								<span class="error">This is an error</span>
+							</div>
+							<div>
+								<label>邮箱</label>
+								<input type="text" class="input-xlarge" required pattern="^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$"  />
+								<span class="error">This is an error</span>
+							</div>
+						</div>
+						<div class="column">
+							<div>
+								<label>性别</label>
+								<input type="text" placeholder="必填项 男或女" required/>
+								<span class="error">This is an error</span>
+							</div>
+							<div>
+								<label>电话</label>
+								<input type="text" class="input-xlarge" required pattern="^[0-9]*[1-9][0-9]*$"/>
+								<span class="error">This is an error</span>
+							</div>
+							<div>
+								<label>Password:</label>
+								<input type="password" name="password"required />
+								<span class="error">This is an error</span>
+							</div>
+						</div>
+						<div class="bottom">
+							<input type="submit" value="注册" />
+							<a href="index.html" rel="login" class="linkform">返回登陆界面</a>
+							<div class="clear"></div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		
+        </script>
+    </body>
+</html>
