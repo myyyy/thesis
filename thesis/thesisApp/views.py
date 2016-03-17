@@ -30,7 +30,7 @@ def course_exercise_detail (request,id):
 		# course_exercises = Exercise.objects.all().filter(course_id = str(id))
 		user = request.session.get('user_obj', False)
 		course_name = Course.objects.get(id = str(id))
-		course_exercises = User.objects.get(number = str(user.number)).exerciseuseranswer_set.filter(course_id =str(id))
+		course_exercises = User.objects.get(id = str(user.id)).exerciseuseranswer_set.filter(course_id =str(id))
 	except Exercise.DoesNotExist:
 		raise Http404
 	return render(request, 'stuTwo/courseExerciseDetail.html',
@@ -62,9 +62,11 @@ def user_login(request):
     if request.method == 'POST':
             #获取表单用户密码
             username=request.POST.get('name','')  
-            password=request.POST.get('password','')  
+            password=request.POST.get('password','') 
+            m = hashlib.md5() 
+            m.update(password)
             #获取的表单数据与数据库进行比较
-            user = User.objects.filter(user_name = username,number = password)
+            user = User.objects.filter(user_name = username,number = m.hexdigest())
             if user:
                 #比较成功，跳转index
                 user_obj = User.objects.get(user_name = username)
@@ -75,15 +77,27 @@ def user_login(request):
                 return response
             else:
                 #比较失败，还在login
-                return HttpResponseRedirect('stuTwo/userLogin.html')
+                return HttpResponseRedirect('/thesisApp/course/')
     else:
         return render_to_response('stuTwo/userLogin.html',context_instance=RequestContext(request))
 
 def msg (request):
+	user = request.session.get('user_obj', False)
+	if user:
+		return render_to_response('stuTwo/msg.html',
+           				locals(),
+           				 context_instance=RequestContext(request))
+	else:
+		return render_to_response('stuTwo/userLogin.html',context_instance=RequestContext(request))
 
-	return render_to_response('stuTwo/msg.html',
+def info (request):
+	user = request.session.get('user_obj', False)
+	if user:
+		return render_to_response('stuTwo/info.html',
            				locals(),
            				 context_instance=RequestContext(request))	
+	else:
+		return render_to_response('stuTwo/userLogin.html',context_instance=RequestContext(request))
 def register(request):
     if request.method == "POST":
             #获取表单信息

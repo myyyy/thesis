@@ -14,6 +14,7 @@ urlpatterns = patterns('',
  	url(r'^thesisApp/course/submit/(?P<id>\d+)/$', 'thesisApp.views.submit_exercise',name = 'submitExercise'),
  	url(r'^msg/$', 'thesisApp.views.msg',name='msg'),
  	url(r'^reg/$', 'thesisApp.views.register',name='reg'),
+ 	url(r'^info/$', 'thesisApp.views.info',name='info'),
 )
 
 

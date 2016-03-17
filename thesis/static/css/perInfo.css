@@ -1,0 +1,28 @@
+#avatar{
+	height: 233px;
+	width: 128px;
+	position: relative;
+	float: left;
+	margin-left: 80px;
+	margin-top: 70px;
+}
+#info{
+	margin-top: 70px;
+	margin-left: 50px;
+	height: 233px;
+	width: 600px;
+	position: relative;
+	float: left;
+}
+#info .form-group{
+	margin-bottom: 30px;
+	margin-left: 20px;
+}
+#info label{
+	width: 45px;
+}
+#info button{
+	margin-top: -29px;
+	margin-left: 69px;
+	width: 170px;
+}
