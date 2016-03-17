@@ -10,6 +10,11 @@ body{
 	text-shadow:1px 1px 1px #fff;
 	overflow-y:scroll;
 }
+.role-column{
+	position: relative;
+	float: left;
+	top: -4px;
+}
 h1{
 	font-size:46px;
 }

@@ -98,6 +98,15 @@ def info (request):
            				 context_instance=RequestContext(request))	
 	else:
 		return render_to_response('stuTwo/userLogin.html',context_instance=RequestContext(request))
+def index (request):
+	user = request.session.get('user_obj', False)
+	if user:
+		return render_to_response('stuTwo/index.html',
+           				locals(),
+           				 context_instance=RequestContext(request))	
+	else:
+		return render_to_response('stuTwo/userLogin.html',context_instance=RequestContext(request))
+
 def register(request):
     if request.method == "POST":
             #获取表单信息
@@ -111,10 +120,22 @@ def register(request):
             else:
 	            password = request.POST.get('password','')  
 	            m.update(password)
+
+	            is_teacher = request.POST.get('role','')  
+	            number = request.POST.get('number','')  
+	            email = request.POST.get('email','')  
+	            tel = request.POST.get('tel','')  
+
 	            #将表单写入数据库
 	            user = User()
 	            user.user_name =  username
+	            user.number =number
+	            user.email = email
+	            user.telphone = tel
+	            user.is_teacher = is_teacher
+	            user.create_time = datetime.now()
 	            user.save()
+
 	            userAuth = LocalAuth()
 	            userAuth.user_account = username
 	            userAuth.user_password= m.hexdigest()

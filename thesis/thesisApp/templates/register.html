@@ -24,24 +24,27 @@
 							</div>
 							<div>
 								<label>学号</label>
-								<input type="text" required pattern="^[0-9]*[1-9][0-9]*$"/>
+								<input type="text" name="number" placeholder="非必填项"/>
 								<span class="error">This is an error</span>
 							</div>
 							<div>
 								<label>邮箱</label>
-								<input type="text" class="input-xlarge" required pattern="^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$"  />
+								<input type="text" name="email" class="input-xlarge" required pattern="^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$"  />
 								<span class="error">This is an error</span>
 							</div>
 						</div>
 						<div class="column">
-							<div>
-								<label>性别</label>
-								<input type="text" placeholder="必填项 男或女" required/>
+							<div style="height: 95px;">
+								<label>用户组：</label>
+								 <label class="role-column">
+								 注册为教师：
+								   <input type="checkbox" name="role">
+								  </label>
 								<span class="error">This is an error</span>
 							</div>
 							<div>
 								<label>电话</label>
-								<input type="text" class="input-xlarge" required pattern="^[0-9]*[1-9][0-9]*$"/>
+								<input type="text" name="tel" class="input-xlarge" required pattern="^[0-9]*[1-9][0-9]*$"/>
 								<span class="error">This is an error</span>
 							</div>
 							<div>
