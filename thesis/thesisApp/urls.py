@@ -16,6 +16,7 @@ urlpatterns = patterns('',
  	url(r'^msg/$', 'thesisApp.views.msg',name='msg'),
  	url(r'^reg/$', 'thesisApp.views.register',name='reg'),
  	url(r'^info/$', 'thesisApp.views.info',name='info'),
+ 	url(r'^logout/$', 'thesisApp.views.logout',name='logout'),
 )
 
 

@@ -23,7 +23,7 @@
 	<nav class="navigation">
 		<ul>
 			<li>
-				<a href="index.html">
+				<a href="{% url 'index' %}" >
 					<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
 					<br/>
 					主页
@@ -53,6 +53,14 @@
 					<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
 					<br/>
 					私信
+				</a>
+			</li>
+			<li>
+				<a href="{% url 'logout' %}"  >
+					
+					<span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+					<br/>
+					退出
 				</a>
 			</li>
 		</ul>
