@@ -13,7 +13,6 @@ class  Course(models.Model):
                             return self.coures_name
 
 class  Exercise(models.Model):
-                ex_id = models.CharField(max_length=30)
                 course_id = models.ForeignKey(Course)
                 ex_content = models.CharField(max_length=10000)
                 ex_title = models.CharField(max_length=30)
@@ -23,7 +22,6 @@ class  Exercise(models.Model):
                 def __unicode__(self):
                             return self.ex_title
 class  Conversation(models.Model):
-                cs_id = models.CharField(max_length=30)
                 from_id = models.CharField(max_length=30)
                 to_id = models.CharField(max_length=30)
                 cs_content = models.CharField(max_length=30)
@@ -46,7 +44,7 @@ class  User(models.Model):
 
 
 class  CourseUser(models.Model):
-                coure = models.ForeignKey(Course)
+                course = models.ForeignKey(Course)
                 user = models.ForeignKey(User)
                 num_unfinished = models.CharField(max_length=50)
 

@@ -1,0 +1,58 @@
+<main class="cd-main">
+		<section class="cd-section projects visible">
+			<!--<header>
+				<div class="cd-title">
+					<h2>Projects</h2>
+					<span>See My class&work</span>
+				</div>
+
+				<a href="#projects-content" class="cd-scroll">Scroll Down</a>
+			</header>-->
+
+			<div class="cd-content" id="projects-content">
+					<div class="classes-navigation">
+				        <!--<ul class="navigation-herf">
+					      <li class="active">
+					        <a href="#">首页</a>
+					      </li>
+					      <li><a href="#">班级</a></li>
+					      <li><a href="#">班级成员</a></li>
+					    </ul>-->
+					    <ul class="nav nav-tabs">
+					 	  <li role="presentation" ><a href="#">主页</a></li>
+						  <li role="presentation" ><a href="{% url 'course' %}">课程</a></li>
+						  <li role="presentation" > <a href="{% url 'courseExercises' course_exercise.course_id.id%}">软件工程-习题</a></li>
+						  <li role="presentation"  class="active"> <a href="{% url 'courseExercises' course_exercise.course_id.id%}" >某某人-习题</a></li>
+						  <li role="presentation" id="submit-work"><a href="#">留-作业</a></li>
+						</ul>
+						
+					</div>
+
+					<div class="classes">
+						<div class="ioc-classes"></div>
+						<div class="classes-name">
+							<!-- 进入当前课程的作业详细界面 -->
+							<a href="{% url 'courseExercises' course.id %}">
+								{{ course.coure}}  
+								<span class="badge">
+								{{ course.num_unfinished}} 
+								</span>
+							</a>
+						</div>
+					</div>
+					
+					<!-- <div class="stu-works">
+						
+						<h4>{{ course_exercise.ex_title }}</h4>
+						<a>{{ course_exercise.ex_content }}</a>
+					</div>
+
+					<div class="works-content">
+						<textarea class="write-textarea">Easy (and free!) You should check out our premium features.</textarea>
+						<button type="button" class="btn btn-default" id="btn-submit">提交</button>
+					</div> -->
+					
+			</div> <!-- .cd-content -->
+			
+		</section> <!-- .cd-section -->
+	</main> <!-- .cd-main -->

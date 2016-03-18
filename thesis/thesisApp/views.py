@@ -23,33 +23,42 @@ def  stu_course(request):
     if user:
 	user = request.session.get('user_obj', False)
 	courses = User.objects.get(id = str(user.id)).courseuser_set.all()
-  	return render(request, 'stuTwo/course.html',  locals(),
-            		context_instance=RequestContext(request))
+	if user.is_teacher:
+		return render_to_response('teacher/course.html',locals(),context_instance=RequestContext(request))
+	else:
+	  	return render_to_response( 'stuTwo/course.html',  locals(),
+	            		context_instance=RequestContext(request))
     else:
         return render_to_response('stuTwo/userLogin.html',context_instance=RequestContext(request))
 
 #该课程下的习题
 def course_exercise_detail (request,id):
-	try:
-		# course_exercises = Exercise.objects.all().filter(course_id = str(id))
-		user = request.session.get('user_obj', False)
-		course_name = Course.objects.get(id = str(id))
-		course_exercises = User.objects.get(id = str(user.id)).exerciseuseranswer_set.filter(course_id =str(id))
-	except Exercise.DoesNotExist:
-		raise Http404
-	return render(request, 'stuTwo/courseExerciseDetail.html',
-           				locals(),
-           				 context_instance=RequestContext(request))
+
+    user = request.session.get('user_obj', False)
+    if user:
+ 
+	course_name = Course.objects.get(id = str(id))
+	course_exercises = User.objects.get(id= str(user.id)).exerciseuseranswer_set.filter(course_id =str(id))
+	if user.is_teacher:
+		course =  Course.objects.get(id = str(id)).courseuser_set.all()
+		return render_to_response('teacher/courseUser.html',locals(),context_instance=RequestContext(request))
+	else:
+	  	return render_to_response( 'stuTwo/courseExerciseDetail.html',  locals(),
+	            		context_instance=RequestContext(request))
+    else:
+        return render_to_response('stuTwo/userLogin.html',context_instance=RequestContext(request))	
+
 # 习题详情及提交习题	
 def show_exercise (request,id):
 	try:
-		course_exercise = Exercise.objects.get(ex_id = str(id))
+		course_exercise = Exercise.objects.get(id = str(id))
 
 	except Exercise.DoesNotExist:
 		raise Http404
 	return render(request, 'stuTwo/showExercise.html',
            				locals(),
            				 context_instance=RequestContext(request))
+   
 
 def submit_exercise (request,id):
 	try:
@@ -88,7 +97,7 @@ def user_login(request):
 def msg (request):
 	user = request.session.get('user_obj', False)
 	if user:
-		return render_to_response('stuTwo/msg.html',
+		return render_to_response('msg.html',
            				locals(),
            				 context_instance=RequestContext(request))
 	else:
@@ -105,11 +114,11 @@ def info (request):
             user.email = emali
             user.save()
             request.session['user_obj'] = user
-            return render_to_response('stuTwo/info.html',
+            return render_to_response('info.html',
                                     locals(),
                         context_instance=RequestContext(request))
         else:
-            return render_to_response('stuTwo/info.html',
+            return render_to_response('info.html',
                                     locals(),
                         context_instance=RequestContext(request))
     else:
@@ -118,9 +127,12 @@ def info (request):
 def index (request):
 	user = request.session.get('user_obj', False)
 	if user:
-		return render_to_response('stuTwo/index.html',
-           				locals(),
-           				 context_instance=RequestContext(request))	
+		if user.is_teacher:
+			return render_to_response('teacher/index.html',context_instance=RequestContext(request))
+		else:
+	  		return render(request, 'stuTwo/index.html',  locals(),
+	            		context_instance=RequestContext(request))
+	
 	else:
 		return render_to_response('stuTwo/userLogin.html',context_instance=RequestContext(request))
 
