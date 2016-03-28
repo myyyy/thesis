@@ -7,6 +7,7 @@ from models import *
 from views import *
 
 urlpatterns = patterns('',
+	url(r'^index/$', 'thesisApp.views.index',name = 'index'),
 	url(r'^login/$', 'thesisApp.views.user_login',name = 'login'),
 	url(r'^course/$', 'thesisApp.views.stu_course',name='course'),
  	url(r'^course/exercises/(?P<id>\d+)/$', 'thesisApp.views.course_exercise_detail',name = 'courseExercises'),
@@ -14,6 +15,10 @@ urlpatterns = patterns('',
  	url(r'^thesisApp/course/submit/(?P<id>\d+)/$', 'thesisApp.views.submit_exercise',name = 'submitExercise'),
  	url(r'^msg/$', 'thesisApp.views.msg',name='msg'),
  	url(r'^reg/$', 'thesisApp.views.register',name='reg'),
+ 	url(r'^info/$', 'thesisApp.views.info',name='info'),
+ 	url(r'^logout/$', 'thesisApp.views.logout',name='logout'),
+ 	url(r'^delcourse/(?P<id>\d+)/$', 'thesisApp.views.del_course',name = 'delCourse'),
+
 )
 
 

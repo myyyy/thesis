@@ -6,14 +6,14 @@
 	margin-left: 20px;
 	position: relative;
 	float: left;
-	margin-top: -50px;
 	box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2);
 }
 .ioc-classes{
-	width: 120px;
-	height: 120px;
+	width: 110px;
+	height: 110px;
 	margin: 0 auto;
 	background-color: #08090B;
+	margin-top: 18px;
 }
 .classes-name{
 	padding: 8px;
@@ -28,13 +28,7 @@
 	padding-top: 30px;
 	padding-left: 18px;
 }
-/*.navigation-herf li{
-	padding-left: 40px;
-	float: left;
-	text-align: center;
-	margin-top:20px ;
-	margin-left: 10px;
-}*/
+
 
 
 

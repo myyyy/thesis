@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>Animated Form Switching with jQuery</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <link rel="shortcut icon" href="../favicon.ico" type="img/x-icon"/>
+        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/login-reg-style.css" />
+    </head>
+    <body>
+		<div class="wrapper">
+			<h4>大学之道,在明明德,在亲民,</h4>
+			<h2>What the great learning teaches, <span>is to illustrate illustrious virtue; </span>  to renovate the people; and to rest in the highest excellence.</h2>
+			<div class="content">
+				<div id="form_wrapper" class="form_wrapper">
+					<form class="login active" method = 'POST'>
+					{% csrf_token %}
+						<h3>Login</h3>
+						<div>
+							<label>Username:</label>
+							<input type="text"  name="name"/>
+							<span class="error">This is an error</span>
+						</div>
+						<div>
+							<label>Password: <a href="forgot_password.html" rel="forgot_password" class="forgot linkform">Forgot your password?</a></label>
+							<input type="password"  name="password"/>
+							<span class="error">This is an error</span>
+						</div>
+						<div class="bottom">
+							<div class="remember"><input type="checkbox" /><span>Keep me logged in</span></div>
+							<input type="submit" value="Login"></input>
+							<a href="register.html" rel="register" class="linkform">注册</a>
+							<div class="clear"></div>
+						</div>
+					</form>
+					
+				</div>
+				<div class="clear"></div>
+			</div>
+		</div>	
+    </body>
+</html>

@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% block title %}
+    index
+{% endblock %}
+{% block content %}
+<nav class="navigation">
+		<ul>
+			<li>
+				<a href="{% url 'index' %}" >
+					<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+					<br/>
+					主页
+				</a>
+			</li>
+
+			<li>
+				<a href="{% url 'info' %}" >
+					<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+					<br/>
+					个人信息
+				</a>
+			</li>
+
+			<li>
+				<a href="{% url 'course' %}" id="active">
+					
+					<span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>
+					<br/>
+					课程
+				</a>
+			</li>
+
+			<li>
+				<a href="{% url 'msg' %}"  >
+					
+					<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+					<br/>
+					私信
+				</a>
+			</li>
+			<li>
+				<a href="{% url 'logout' %}"  >
+					
+					<span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+					<br/>
+					退出
+				</a>
+			</li>
+		</ul>
+	</nav> <!-- .cd-side-navigation -->
+<main class="cd-main">
+		<section class="cd-section projects visible">
+			<!--<header>
+				<div class="cd-title">
+					<h2>Projects</h2>
+					<span>See My class&work</span>
+				</div>
+
+				<a href="#projects-content" class="cd-scroll">Scroll Down</a>
+			</header>-->
+
+			<div class="cd-content" id="projects-content">
+					<div class="classes-navigation">
+					    <ul class="nav nav-tabs">
+					 	  <li role="presentation" ><a href="#">主页</a></li>
+						  <li role="presentation" class="active"><a href="{% url 'course' %}">课程</a></li>
+						</ul>
+						
+					</div>
+					{% for course in courses %}
+					<div class="classes">
+						<div class="ioc-classes"></div>
+						<div class="classes-name">
+							<!-- 进入当前课程的作业详细界面 -->
+							<a href="{% url 'courseExercises' course.course.id %}">
+								{{ course.course}}  
+								<span class="badge">
+								{{ course.num_unfinished}} 
+								</span>
+								
+							</a>
+						</div>
+					</div>
+					{% endfor %}
+					
+					
+					
+			</div> <!-- .cd-content -->
+		</section> <!-- .cd-section -->
+	</main> <!-- .cd-main -->
+	{% endblock %}

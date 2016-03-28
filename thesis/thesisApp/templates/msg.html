@@ -1,9 +1,11 @@
 <!doctype html>
-<html lang="en" >
+<html lang="en" class="no-js">
 <head>
+
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="{{ STATIC_URL }}css/projects.css"> <!-- CSS reset -->
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/msg.css" />
+
 	<link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/bootstrap-responsive.min.css" />
 	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/bootstrap-responsive.css" />
@@ -12,13 +14,12 @@
 	<link rel="stylesheet" href="{{ STATIC_URL }}css/reset.css"> <!-- CSS reset -->
 	<link rel="stylesheet" href="{{ STATIC_URL }}css/styles.css"> <!-- Resource style -->
 	<script src="{{ STATIC_URL }}js/modernizr.js"></script> <!-- Modernizr -->
-	<link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+  	<script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+  	<link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
 	<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
-	<script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-  	
+   	<script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 	<title>Animated Page Transition #2 | CodyHouse</title>
 </head>
-	
 <body>
 	<nav class="navigation">
 		<ul>
@@ -26,7 +27,7 @@
 				<a href="{% url 'index' %}" >
 					<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
 					<br/>
-					stu主页
+					主页
 				</a>
 			</li>
 
@@ -39,7 +40,7 @@
 			</li>
 
 			<li>
-				<a href="{% url 'course' %}" id="active">
+				<a href="{% url 'course' %}" >
 					
 					<span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>
 					<br/>
@@ -48,7 +49,7 @@
 			</li>
 
 			<li>
-				<a href="{% url 'msg' %}"  >
+				<a href="{% url 'msg' %}"   id="active">
 					
 					<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
 					<br/>
@@ -67,77 +68,81 @@
 	</nav> <!-- .cd-side-navigation -->
 	
 	<main class="cd-main">
-		<section class="cd-section projects visible">
-			<!--<header>
-				<div class="cd-title">
-					<h2>Projects</h2>
-					<span>See My class&work</span>
+		
+		<section class="cd-section contact visible">
+			<div class="cd-content" id="contact-content">
+				
+				<div class="choose-class">
+					<h1>私信</h2>
+					<br/>
+					<span>和其他用户的私密聊天</span>
+					<ul class="nav nav-pills nav-stacked">
+						<li role="presentation" class="active"><a href="#" >所有</a></li>
+					  	<li role="presentation"><a href="#">未读</a></li>
+					  	<li role="presentation" data-toggle="modal" data-target="#myModal">
+					  		<a href="#">发送私信</a>
+					  	</li>
+					</ul>
 				</div>
-
-				<a href="#projects-content" class="cd-scroll">Scroll Down</a>
-			</header>-->
-
-			<div class="cd-content" id="projects-content">
-					<div class="classes-navigation">
-					    <ul class="nav nav-tabs">
-					 	  <li role="presentation" ><a href="#">主页</a></li>
-						  <li role="presentation" class="active"><a href="{% url 'course' %}">课程</a></li>
-						</ul>
-						
-					</div>
-					{% for course in courses %}
-					<div class="classes">
-						<span class="glyphicon glyphicon-remove" aria-hidden="true" style="float: right;" role="presentation"  data-toggle="modal" data-target="#myModal"></span>
-						
-						<div class="ioc-classes">
-							
-						</div>
-						<div class="classes-name">
-							<!-- 进入当前课程的作业详细界面 -->
-							<a href="{% url 'courseExercises' course.course.id %}">
-								{{ course.course}}  
-								<span class="badge">
-								{{ course.num_unfinished}} 
-								</span>
-							</a>
-						</div>
-					</div>
-
-	
+				<div class="write-work">
+					<h1>私信</h1>
+					<table class="table table-striped" id="msg-table">
+					
+						<tr>
+						  <td class="col-md-1">student</td>
+						  <td class="col-md-2">This is some test worlds.</td>
+						  <td class="col-md-2">2016年3月</td>
+						  <td class="col-md-2">查看</td>
+						</tr>
+					</table>
+				</div>
+				
 			</div> <!-- .cd-content -->
 		</section> <!-- .cd-section -->
-		<!-- Modal --><!--删除课程弹出框-->
+
+		<!-- Modal --><!--发送消息弹出框-->
 		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		  <div class="modal-dialog" role="document">
 		    <div class="modal-content">
 		      <div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		        <h4 class="modal-title" id="myModalLabel">删除课程</h4>
+		        <h4 class="modal-title" id="myModalLabel">发送私信</h4>
 		      </div>
 		      <div class="modal-body">
 				  <div class="panel-heading">
-				  	<label>请仔细操作，一经删除不可恢复。</label>
+				  	<label>接收者：</label>
 				  </div>
 				  <div class="panel-body">
-				   <div class="alert alert-danger" role="alert">课程名称：{{ course.course}} </div>
+				    <div class="input-group">
+					  <span class="input-group-addon" id="basic-addon1">昵称</span>
+					  <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
+					</div>
+				  </div>
+				  <div class="panel-heading">
+				  	<label>内容：</label>
+				  </div>
+				  <div class="panel-body">
+					<textarea class="form-control" rows="3"></textarea>
+				  </div>
 		      </div>
 		      <div class="modal-footer">
-		      <!--   <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button> -->
-		        	<a href="{% url 'delCourse' course.course.id%}">提交</a>
+		        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+		        <button type="button" class="btn btn-primary">提交</button>
 		      </div>
 		    </div>
 		  </div>
 		</div>
-		{% endfor %}
 	</main> <!-- .cd-main -->
 
-	<div id="cd-loading-bar" data-scale="1" class="projects"></div> <!-- lateral loading bar -->
-	<script>$(function () 
-	      { $("[data-toggle='popover']").popover();
-	      });
-  	 </script>
-<script src="{{ STATIC_URL }}js/jquery-2.1.4.js"></script>
-<script src="{{ STATIC_URL }}js/velocity.min.js"></script>
-<script src="{{ STATIC_URL }}js/main.js"></script> <!-- Resource jQuery -->
+	<div id="cd-loading-bar" data-scale="1" class="contact"></div> <!-- lateral loading bar -->
+	<!--文本编辑器 markdown-->
+
+  	<script>$(function () 
+      { $("[data-toggle='popover']").popover();
+      });
+   </script>
+	<script src="{{ STATIC_URL }}js/jquery-2.1.4.js"></script>
+	<script src="{{ STATIC_URL }}js/velocity.min.js"></script>
+	<script src="{{ STATIC_URL }}js/main.js"></script> <!-- Resource jQuery -->
 </body>
 </html>

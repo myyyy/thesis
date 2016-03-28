@@ -19,33 +19,56 @@ from datetime import datetime
 #显示课程
 def  stu_course(request):
 	#查询指定用户的课程
+    user = request.session.get('user_obj', False)
+    if user:
 	user = request.session.get('user_obj', False)
 	courses = User.objects.get(id = str(user.id)).courseuser_set.all()
-  	return render(request, 'stuTwo/course.html',  locals(),
-            		context_instance=RequestContext(request))
+	if user.is_teacher:
+		return render_to_response('teacher/course.html',locals(),context_instance=RequestContext(request))
+	else:
+	  	return render_to_response( 'stuTwo/course.html',  locals(),
+	            		context_instance=RequestContext(request))
+    else:
+        return render_to_response('stuTwo/userLogin.html',context_instance=RequestContext(request))
 
 #该课程下的习题
 def course_exercise_detail (request,id):
-	try:
-		# course_exercises = Exercise.objects.all().filter(course_id = str(id))
-		user = request.session.get('user_obj', False)
-		course_name = Course.objects.get(id = str(id))
-		course_exercises = User.objects.get(number = str(user.number)).exerciseuseranswer_set.filter(course_id =str(id))
-	except Exercise.DoesNotExist:
-		raise Http404
-	return render(request, 'stuTwo/courseExerciseDetail.html',
-           				locals(),
-           				 context_instance=RequestContext(request))
+
+    user = request.session.get('user_obj', False)
+    if user:
+ 
+	course_name = Course.objects.get(id = str(id))
+	course_exercises = User.objects.get(id= str(user.id)).exerciseuseranswer_set.filter(course_id =str(id))
+	if user.is_teacher:
+		course =  Course.objects.get(id = str(id)).courseuser_set.all()
+		return render_to_response('teacher/courseUser.html',locals(),context_instance=RequestContext(request))
+	else:
+	  	return render_to_response( 'stuTwo/courseExerciseDetail.html',  locals(),
+	            		context_instance=RequestContext(request))
+    else:
+        return render_to_response('stuTwo/userLogin.html',context_instance=RequestContext(request))	
+
 # 习题详情及提交习题	
 def show_exercise (request,id):
 	try:
-		course_exercise = Exercise.objects.get(ex_id = str(id))
+		course_exercise = Exercise.objects.get(id = str(id))
 
 	except Exercise.DoesNotExist:
 		raise Http404
 	return render(request, 'stuTwo/showExercise.html',
            				locals(),
            				 context_instance=RequestContext(request))
+   
+def del_course(request,id):
+    user = request.session.get('user_obj', False)
+    if user:
+ 
+	course_name = Course.objects.get(id = str(id))
+	Course.objects.get(id = str(id)).courseuser_set.filter(course = course_name.id).delete()
+	
+	return HttpResponseRedirect('/thesisApp/course/')
+    else:
+        return render_to_response('stuTwo/userLogin.html',context_instance=RequestContext(request))
 
 def submit_exercise (request,id):
 	try:
@@ -59,12 +82,14 @@ def submit_exercise (request,id):
 
 #登陆
 def user_login(request):
+    m = hashlib.md5()
     if request.method == 'POST':
             #获取表单用户密码
             username=request.POST.get('name','')  
             password=request.POST.get('password','')  
+            m.update(password)
             #获取的表单数据与数据库进行比较
-            user = User.objects.filter(user_name = username,number = password)
+            user = LocalAuth.objects.filter(user_account = username,user_password = m.hexdigest())
             if user:
                 #比较成功，跳转index
                 user_obj = User.objects.get(user_name = username)
@@ -75,15 +100,59 @@ def user_login(request):
                 return response
             else:
                 #比较失败，还在login
-                return HttpResponseRedirect('stuTwo/userLogin.html')
+                return render_to_response('login.html',context_instance=RequestContext(request))
+    else:
+        return render_to_response('login.html',context_instance=RequestContext(request))
+
+def msg (request):
+	user = request.session.get('user_obj', False)
+	if user:
+		return render_to_response('msg.html',
+           				locals(),
+           				 context_instance=RequestContext(request))
+	else:
+		return render_to_response('stuTwo/userLogin.html',context_instance=RequestContext(request))
+
+def info (request):
+    user = request.session.get('user_obj', False)
+    if user:
+        if request.method == 'POST':
+            user = User.objects.get(id = str(user.id))
+            account=request.POST.get('account','')  
+            emali=request.POST.get('email','')  
+            user.user_name = account
+            user.email = emali
+            user.save()
+            request.session['user_obj'] = user
+            return render_to_response('info.html',
+                                    locals(),
+                        context_instance=RequestContext(request))
+        else:
+            return render_to_response('info.html',
+                                    locals(),
+                        context_instance=RequestContext(request))
     else:
         return render_to_response('stuTwo/userLogin.html',context_instance=RequestContext(request))
 
-def msg (request):
+def index (request):
+	user = request.session.get('user_obj', False)
+	if user:
+		if user.is_teacher:
+			return render_to_response('teacher/index.html',context_instance=RequestContext(request))
+		else:
+	  		return render(request, 'stuTwo/index.html',  locals(),
+	            		context_instance=RequestContext(request))
+	
+	else:
+		return render_to_response('stuTwo/userLogin.html',context_instance=RequestContext(request))
 
-	return render_to_response('stuTwo/msg.html',
-           				locals(),
-           				 context_instance=RequestContext(request))	
+def logout(request):
+    try:
+        del request.session['user_obj']
+    except KeyError:
+        pass
+    return HttpResponseRedirect('/thesisApp/login/')
+
 def register(request):
     if request.method == "POST":
             #获取表单信息
@@ -91,16 +160,28 @@ def register(request):
 
             username = request.POST.get('account','')  
             if LocalAuth.objects.filter(user_account = str(username)):
-	            	return render_to_response('reg.html',
+	            	return render_to_response('register.html',
 	           				locals(),
 	           				 context_instance=RequestContext(request))
             else:
 	            password = request.POST.get('password','')  
 	            m.update(password)
+
+	            is_teacher = request.POST.get('role','')  
+	            number = request.POST.get('number','')  
+	            email = request.POST.get('email','')  
+	            tel = request.POST.get('tel','')  
+
 	            #将表单写入数据库
 	            user = User()
 	            user.user_name =  username
+	            user.number =number
+	            user.email = email
+	            user.telphone = tel
+	            user.is_teacher = is_teacher
+	            user.create_time = datetime.now()
 	            user.save()
+
 	            userAuth = LocalAuth()
 	            userAuth.user_account = username
 	            userAuth.user_password= m.hexdigest()
@@ -115,7 +196,7 @@ def register(request):
 	            return response
 	            	
     else:
- 	return render_to_response('reg.html',
+ 	return render_to_response('register.html',
            				locals(),
            				 context_instance=RequestContext(request))
 # def userLogout(request):  

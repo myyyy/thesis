@@ -24,7 +24,7 @@
 	<nav class="navigation">
 		<ul>
 			<li>
-				<a href="index.html" >
+				<a href="{% url 'index' %}" >
 					<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
 					<br/>
 					主页
@@ -71,23 +71,50 @@
 		
 		<section class="cd-section contact visible">
 			<div class="cd-content" id="contact-content">
-				
+			<form class="register active" method = 'POST'>	
 				<div class="choose-class">
-					<h1>加入课程</h2>
-					<span>-----输入课程ID</span>
-					<div class="col-lg-14">
-					    <div class="input-group">
-					      <input type="text" class="form-control" placeholder="Search for...">
-					      <span class="input-group-btn">
-					        <button class="btn btn-default" type="submit">Go!</button>
-					      </span>
-					    </div><!-- /input-group -->
-					</div><!-- /.col-lg-6 -->
+					<h1>个人信息</h2>
+					<br/>
+					<span>个人用户资料中心</span>
+					<!-- <ul class="nav nav-pills nav-stacked">
+						<li role="presentation" class="active"><a href="#" >个人设置</a></li>
+					  	<li role="presentation" data-toggle="modal" data-target="#myModal">
+					  		<a href="#">修改</a>
+					  	</li>
+					</ul> -->
 				</div>
 				<div class="write-work">
-					
+					<div id="avatar">头像</div>
+					<div id="info">
+						<form class="form-inline">
+						{% csrf_token %}
+						  <div class="form-group">
+						    <label for="exampleInputName2">用户名</label>
+						    <input type="text" class="form-control" placeholder="name"  name="account" value="{{ user.user_name}}">
+						  </div>
+						  <div class="form-group">
+						    <label for="exampleInputEmail2">Email</label>
+						    <input type="email" class="form-control" value="{{ user.email}}" name="email">
+						  </div>
+						  <fieldset disabled>
+						  <div class="form-group">
+						    <label for="exampleInputEmail2">学号</label>
+						    <input type="email" class="form-control" value="{{ user.number}}">
+						  </div>
+						  <div class="form-group">
+						    <label for="exampleInputEmail2">电话号</label>
+						    <input type="email" class="form-control" value="{{ user.telphone}}">
+						  </div>
+						  <div class="form-group">
+						    <label for="exampleInputEmail2">加入时间</label>
+						    <input type="email" class="form-control"value="{{ user.create_time}}">
+						  </div>
+						  </fieldset>
+						  <button type="submit" class="btn btn-default">提交</button>
+						</form>
+					</div>
 				</div>
-				
+			</form>	
 			</div> <!-- .cd-content -->
 		</section> <!-- .cd-section -->
 
