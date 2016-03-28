@@ -17,6 +17,8 @@ urlpatterns = patterns('',
  	url(r'^reg/$', 'thesisApp.views.register',name='reg'),
  	url(r'^info/$', 'thesisApp.views.info',name='info'),
  	url(r'^logout/$', 'thesisApp.views.logout',name='logout'),
+ 	url(r'^delcourse/(?P<id>\d+)/$', 'thesisApp.views.del_course',name = 'delCourse'),
+
 )
 
 

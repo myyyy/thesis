@@ -59,6 +59,16 @@ def show_exercise (request,id):
            				locals(),
            				 context_instance=RequestContext(request))
    
+def del_course(request,id):
+    user = request.session.get('user_obj', False)
+    if user:
+ 
+	course_name = Course.objects.get(id = str(id))
+	Course.objects.get(id = str(id)).courseuser_set.filter(course = course_name.id).delete()
+	
+	return HttpResponseRedirect('/thesisApp/course/')
+    else:
+        return render_to_response('stuTwo/userLogin.html',context_instance=RequestContext(request))
 
 def submit_exercise (request,id):
 	try:
